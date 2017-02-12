@@ -1,0 +1,8 @@
+# include a play after another play
+- hosts: all
+  tasks:
+    - debug:
+        msg: "play1"
+
+- include: java.yml
+- include: maven.yml

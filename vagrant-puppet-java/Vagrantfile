@@ -1,0 +1,26 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = "vagrant.example.com"
+
+
+
+  config.vm.provision :shell, :run => "always" do |shell|
+    shell.inline = %{
+      # sudo apt-get update
+      puppet module install /vagrant/modules/puppetlabs-stdlib-4.15.0.tar.gz --ignore-dependencies --force
+      puppet module install /vagrant/modules/puppetlabs-apt-2.3.0.tar.gz --ignore-dependencies --force
+      puppet module install /vagrant/modules/puppet-archive-1.2.0.tar.gz --ignore-dependencies --force
+      puppet module install /vagrant/modules/aco-oracle_java-2.8.0.tar.gz --ignore-dependencies --force
+
+
+
+    }
+  end
+
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.provision "puppet" do |puppet|
+    #Start by default met default.pp!
+    end
+end

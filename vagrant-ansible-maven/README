@@ -1,0 +1,4 @@
+Required ansible roles.
+
+ansible-galaxy install ansiblebit.oracle-java
+ansible-galaxy install gantsign.maven
